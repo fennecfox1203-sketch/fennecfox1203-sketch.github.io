@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Tesla 인증 콜백</title>
+<style>body{font-family:sans-serif;max-width:640px;margin:2em auto;padding:0 1em}code{display:block;word-break:break-all;background:#f2f2f2;padding:.6em;margin:.3em 0}button{padding:.4em 1em}</style>
+</head><body>
+<h1>Tesla 인증 콜백</h1>
+<p><strong>이 code 값을 봇에게 비밀 입력으로 넘겨 주세요. 다른 곳에 공유하지 마세요.</strong></p>
+<h2>code</h2><code id="code">(없음)</code><button onclick="cp('code')">code 복사</button>
+<h2>state</h2><code id="state">(없음)</code><button onclick="cp('state')">state 복사</button>
+<p id="msg"></p>
+<script>
+var p=new URLSearchParams(location.search);
+['code','state'].forEach(function(k){var v=p.get(k);if(v)document.getElementById(k).textContent=v;});
+var e=p.get('error');if(e)document.getElementById('msg').textContent='오류: '+e+' '+(p.get('error_description')||'');
+function cp(id){var t=document.getElementById(id).textContent;
+ if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){document.getElementById('msg').textContent=id+' 복사됨';});}
+ else{var r=document.createRange();r.selectNodeContents(document.getElementById(id));var s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');document.getElementById('msg').textContent=id+' 복사됨';}}
+</script>
+</body></html>
